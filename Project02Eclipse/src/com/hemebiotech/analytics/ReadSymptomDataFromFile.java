@@ -1,47 +1,35 @@
 package com.hemebiotech.analytics;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.util.Collections;
 
-/**
- * Simple brute force implementation
- *
- */
+
 public class ReadSymptomDataFromFile implements ISymptomReader {
+/*
+Create a GetSymptoms method.
 
-	private String filepath;
-	
-	/**
-	 * 
-	 * @param filepath a full or partial path to file with symptom strings in it, one per line
-	 */
-	public ReadSymptomDataFromFile (String filepath) {
-		this.filepath = filepath;
-	}
-	
+*/
 	@Override
-	public List<String> GetSymptoms() {
-		ArrayList<String> result = new ArrayList<String>();
-		
-		if (filepath != null) {
-			try {
-				BufferedReader reader = new BufferedReader (new FileReader(filepath));
-				String line = reader.readLine();
-				
-				while (line != null) {
-					result.add(line);
-					line = reader.readLine();
-				}
-				reader.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return result;
-	}
-
+    public ArrayList<String> GetSymptoms(File file, ArrayList<String> list) { // Method to read the file and count occurences.
+       try {
+           Scanner readFile = new Scanner(file); // Scanner used to read the file.
+           while (readFile.hasNextLine()) {
+               String data = readFile.nextLine(); // Data for each next line.
+               list.add(data); 
+           }
+           readFile.close();
+           Collections.sort(list); // Array alphabetically sorted.
+           System.out.println(list);
+       } catch (FileNotFoundException e) { // Instructions if no file is found.
+           System.out.println("Error. File is absent.");
+           e.printStackTrace();
+       }
+	   return list;
+    }
+	
 }
+
+
