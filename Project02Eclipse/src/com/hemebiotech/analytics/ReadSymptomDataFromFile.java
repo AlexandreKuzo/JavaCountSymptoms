@@ -1,6 +1,7 @@
 package com.hemebiotech.analytics;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -13,7 +14,7 @@ Create a GetSymptoms method.
 
 */
 	@Override
-    public ArrayList<String> GetSymptoms(File file, ArrayList<String> list) { // Method to read the file and count occurences.
+    public List<String> GetSymptoms(File file, List<String> list) { // Method to read the file and count occurences.
        try {
            Scanner readFile = new Scanner(file); // Scanner used to read the file.
            while (readFile.hasNextLine()) {
@@ -29,6 +30,8 @@ Create a GetSymptoms method.
        }
 	   return list;
     }
+
+	
 	
 }
 
