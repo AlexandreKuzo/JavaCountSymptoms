@@ -1,6 +1,5 @@
 package com.hemebiotech.analytics;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.io.File;
@@ -18,7 +17,6 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 
 
 
-	@Override
     public List<String> GetSymptoms(File file, List<String> list) { // Method to read the file and count occurences.
        try {
            Scanner readFile = new Scanner(file); // Scanner used to read the file.
@@ -28,7 +26,6 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
            }
            readFile.close();
            Collections.sort(list); // Array alphabetically sorted.
-           System.out.println(list);
        } catch (FileNotFoundException e) { // Instructions if no file is found.
            System.out.println("Error. File is absent.");
            e.printStackTrace();
@@ -42,7 +39,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	 * 
 	 */
 
-	@Override
+
 	public Map<String, Long> CountSymptoms(List<String> list) {
 		Map<String, Long> output = list.stream()
         .collect(Collectors.groupingBy(e -> e.toString(), Collectors.counting()));
