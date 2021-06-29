@@ -2,17 +2,22 @@ package com.hemebiotech.analytics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 
 public class ReadSymptomDataFromFile implements ISymptomReader {
-/*
-Create a GetSymptoms method.
+	/** 
+	 * Create the GetSymptoms method.
+	 * 
+	*/
 
-*/
+
+
 	@Override
     public List<String> GetSymptoms(File file, List<String> list) { // Method to read the file and count occurences.
        try {
@@ -31,7 +36,20 @@ Create a GetSymptoms method.
 	   return list;
     }
 
-	
+	/**
+	 * 
+	 * Create the CountSymptoms method.
+	 * 
+	 */
+
+	@Override
+	public Map<String, Long> CountSymptoms(List<String> list) {
+		Map<String, Long> output = list.stream()
+        .collect(Collectors.groupingBy(e -> e.toString(), Collectors.counting()));
+        System.out.println(output);
+
+		return output;
+	}
 	
 }
 

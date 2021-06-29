@@ -1,6 +1,7 @@
 package com.hemebiotech.analytics;
 
 import java.util.List;
+import java.util.Map;
 import java.io.File;
 
 
@@ -22,7 +23,10 @@ public interface ISymptomReader {
 
 
 	/**
+	 *  Count occurrences of words after "scanning" it
 	 * 
+	 * @return a map with key (symptoms) and values (number of occurrences)
 	 */
+	Map<String, Long> CountSymptoms (List<String> list);
 	
 }
