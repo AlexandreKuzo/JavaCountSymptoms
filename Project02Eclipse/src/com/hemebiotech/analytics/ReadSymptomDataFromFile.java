@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Collections;
+import java.util.TreeMap;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 
@@ -25,11 +27,12 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
                list.add(data); 
            }
            readFile.close();
-           Collections.sort(list); // Array alphabetically sorted.
+           
        } catch (FileNotFoundException e) { // Instructions if no file is found.
            System.out.println("Error. File is absent.");
            e.printStackTrace();
        }
+       
 	   return list;
     }
 
@@ -42,7 +45,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 
 	public Map<String, Long> CountSymptoms(List<String> list) {
 		Map<String, Long> output = list.stream()
-        .collect(Collectors.groupingBy(e -> e.toString(), Collectors.counting()));
+        .collect(Collectors.groupingBy(e -> e.toString(), TreeMap::new, Collectors.counting()));
         System.out.println(output);
 
 		return output;
